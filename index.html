@@ -85,32 +85,32 @@
             color: #333;
         }
 
-        .mini-page {
+        .full-page {
             display: none;
             background-color: #fff;
             position: fixed;
-            top: 10%;
-            left: 10%;
-            width: 80%;
-            height: 80%;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             overflow-y: auto;
-            border-radius: 15px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            border-radius: 0;
+            box-shadow: none;
             padding: 20px;
             z-index: 1000;
         }
 
-        .mini-page.active {
+        .full-page.active {
             display: block;
         }
 
-        .mini-page-header {
+        .full-page-header {
             font-size: 20px;
             margin-bottom: 15px;
             font-weight: bold;
         }
 
-        .mini-page-content {
+        .full-page-content {
             margin-top: 20px;
         }
 
@@ -206,11 +206,11 @@
         </div>
     </div>
 
-    <!-- Mini Page for New Airdrop -->
-    <div class="mini-page" id="newAirdropPage">
+    <!-- Full Page for New Airdrop -->
+    <div class="full-page" id="newAirdropPage">
         <button class="back-button" onclick="goBack()">Back</button>
-        <div class="mini-page-header">Add New Airdrop</div>
-        <div class="mini-page-content">
+        <div class="full-page-header">Add New Airdrop</div>
+        <div class="full-page-content">
             <input class="input-field" type="text" id="airdropName" placeholder="Airdrop Name" />
             <input class="input-field" type="url" id="websiteLink" placeholder="Website (Link)" />
             <input class="input-field" type="url" id="checkInLink" placeholder="Daily Check-in (Link)" />
@@ -221,22 +221,22 @@
         </div>
     </div>
 
-    <!-- Mini Page for My Airdrops -->
-    <div class="mini-page" id="myAirdropsPage">
+    <!-- Full Page for My Airdrops -->
+    <div class="full-page" id="myAirdropsPage">
         <button class="back-button" onclick="goBack()">Back</button>
-        <div class="mini-page-header">My Airdrops</div>
-        <div class="mini-page-content">
+        <div class="full-page-header">My Airdrops</div>
+        <div class="full-page-content">
             <ul class="airdrop-list" id="airdropList">
                 <!-- Airdrops will be displayed here dynamically -->
             </ul>
         </div>
     </div>
 
-    <!-- Mini Page for Scamster -->
-    <div class="mini-page" id="scamsterPage">
+    <!-- Full Page for Scamster -->
+    <div class="full-page" id="scamsterPage">
         <button class="back-button" onclick="goBack()">Back</button>
-        <div class="mini-page-header">Scamster</div>
-        <div class="mini-page-content">
+        <div class="full-page-header">Scamster</div>
+        <div class="full-page-content">
             <input class="input-field" type="url" id="scamUrl" placeholder="Enter URL to Flag" />
             <button class="action-button" onclick="flagScam()">Flag Scam</button>
             <ul class="scam-list" id="scamList">
@@ -245,11 +245,11 @@
         </div>
     </div>
 
-    <!-- Mini Page for Profile Settings -->
-    <div class="mini-page" id="profileSettingsPage">
+    <!-- Full Page for Profile Settings -->
+    <div class="full-page" id="profileSettingsPage">
         <button class="back-button" onclick="goBack()">Back</button>
-        <div class="mini-page-header">Profile Settings</div>
-        <div class="mini-page-content">
+        <div class="full-page-header">Profile Settings</div>
+        <div class="full-page-content">
             <label for="profilePicUpload" class="profile-pic-upload">Choose Profile Picture</label>
             <input type="file" id="fileInput" style="display: none;" accept="image/*">
         </div>
@@ -332,8 +332,8 @@
                 const listItem = document.createElement('li');
                 listItem.innerHTML = `
                     <strong>${airdrop.name}</strong><br>
-                    <a href="${airdrop.website}" target="_blank">Website</a><br>
-                    <a href="${airdrop.checkIn}" target="_blank">Daily Check-in</a><br>
+                    <a href="${airdrop.website}" target="_blank">Website</a> |
+                    <a href="${airdrop.checkIn}" target="_blank">Daily Check-in</a> |
                     <a href="${airdrop.transaction}" target="_blank">Daily Transaction</a><br>
                     Funding: ${airdrop.funding}<br>
                     Expected Date: ${airdrop.expectedDate}<br>
@@ -357,7 +357,7 @@
                 const listItem = document.createElement('li');
                 listItem.classList.add('scam-item');
                 listItem.innerHTML = `
-                    <strong>Fukster</strong>
+                    <strong>${scam}</strong>
                     <button class="remove-button" onclick="removeScam(${index})">Remove</button>
                 `;
                 scamList.appendChild(listItem);
