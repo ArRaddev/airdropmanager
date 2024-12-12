@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crypto Airdrop Manager</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+
+        .container {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .profile-pic-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .profile-pic-container img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .app-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+
+        .app-subtitle {
+            font-size: 16px;
+            color: gray;
+            margin-bottom: 20px;
+        }
+
+        .menu {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .menu-item {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            width: 90%;
+            max-width: 400px;
+            padding: 15px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
+            cursor: pointer;
+        }
+
+        .menu-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .menu-item-icon {
+            width: 40px;
+            height: 40px;
+            margin-right: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f0f0f0;
+            border-radius: 50%;
+        }
+
+        .menu-item-text {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .mini-page {
+            display: none;
+            background-color: #fff;
+            position: fixed;
+            top: 10%;
+            left: 10%;
+            width: 80%;
+            height: 80%;
+            overflow-y: auto;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            z-index: 1000;
+        }
+
+        .mini-page.active {
+            display: block;
+        }
+
+        .mini-page-header {
+            font-size: 20px;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .mini-page-content {
+            margin-top: 20px;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+        }
+
+        .action-button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .action-button:hover {
+            opacity: 0.8;
+        }
+
+        .back-button {
+            padding: 10px 20px;
+            background-color: #ccc;
+            color: black;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+
+        .back-button:hover {
+            opacity: 0.8;
+        }
+
+        .profile-pic-upload {
+            margin-top: 10px;
+            padding: 8px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .profile-pic-upload:hover {
+            opacity: 0.8;
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 14px;
+            color: gray;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Profile Picture Section -->
+        <div class="profile-pic-container">
+            <img id="profilePic" src="https://via.placeholder.com/100" alt="Profile Picture">
+        </div>
+
+        <div class="app-title">Crypto Airdrop Manager</div>
+        <div class="app-subtitle">Managing airdrops efficiently</div>
+
+        <div class="menu">
+            <div class="menu-item" id="newAirdropBtn">
+                <div class="menu-item-icon">💰</div>
+                <div class="menu-item-text">New Airdrop</div>
+            </div>
+            <div class="menu-item" id="myAirdropsBtn">
+                <div class="menu-item-icon">📑</div>
+                <div class="menu-item-text">My Airdrops</div>
+            </div>
+            <div class="menu-item" id="scamsterBtn">
+                <div class="menu-item-icon">🐹</div>
+                <div class="menu-item-text">Scamster</div>
+            </div>
+            <div class="menu-item" id="profileSettingsBtn">
+                <div class="menu-item-icon">⚙️</div>
+                <div class="menu-item-text">Profile Settings</div>
+            </div>
+            <div class="menu-item">
+                <div class="menu-item-icon">🔒</div>
+                <div class="menu-item-text">Security preferences</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mini Page for New Airdrop -->
+    <div class="mini-page" id="newAirdropPage">
+        <button class="back-button" onclick="goBack()">Back</button>
+        <div class="mini-page-header">Add New Airdrop</div>
+        <div class="mini-page-content">
+            <input class="input-field" type="text" id="airdropName" placeholder="Airdrop Name" />
+            <input class="input-field" type="url" id="websiteLink" placeholder="Website (Link)" />
+            <input class="input-field" type="url" id="checkInLink" placeholder="Daily Check-in (Link)" />
+            <input class="input-field" type="url" id="transactionLink" placeholder="Daily Transaction (Link)" />
+            <input class="input-field" type="number" id="fundingAmount" placeholder="Funding (Amount)" />
+            <input class="input-field" type="date" id="expectedDate" placeholder="Airdrop Expected Date" />
+            <button class="action-button" onclick="saveAirdrop()">Save</button>
+        </div>
+    </div>
+
+    <!-- Mini Page for My Airdrops -->
+    <div class="mini-page" id="myAirdropsPage">
+        <button class="back-button" onclick="goBack()">Back</button>
+        <div class="mini-page-header">My Airdrops</div>
+        <div class="mini-page-content">
+            <ul class="airdrop-list" id="airdropList">
+                <!-- Airdrops will be displayed here dynamically -->
+            </ul>
+        </div>
+    </div>
+
+    <!-- Mini Page for Scamster -->
+    <div class="mini-page" id="scamsterPage">
+        <button class="back-button" onclick="goBack()">Back</button>
+        <div class="mini-page-header">Scamster</div>
+        <div class="mini-page-content">
+            <input class="input-field" type="url" id="scamUrl" placeholder="Enter URL to Flag" />
+            <button class="action-button" onclick="flagScam()">Flag Scam</button>
+            <ul class="scam-list" id="scamList">
+                <!-- Scam URLs will be displayed here dynamically -->
+            </ul>
+        </div>
+    </div>
+
+    <!-- Mini Page for Profile Settings -->
+    <div class="mini-page" id="profileSettingsPage">
+        <button class="back-button" onclick="goBack()">Back</button>
+        <div class="mini-page-header">Profile Settings</div>
+        <div class="mini-page-content">
+            <label for="profilePicUpload" class="profile-pic-upload">Choose Profile Picture</label>
+            <input type="file" id="fileInput" style="display: none;" accept="image/*">
+        </div>
+    </div>
+
+    <div class="copyright">
+        &copy; 2024 AR RAD. All rights reserved.
+    </div>
+
+    <script>
+        const newAirdropBtn = document.getElementById('newAirdropBtn');
+        const myAirdropsBtn = document.getElementById('myAirdropsBtn');
+        const scamsterBtn = document.getElementById('scamsterBtn');
+        const profileSettingsBtn = document.getElementById('profileSettingsBtn');
+        const newAirdropPage = document.getElementById('newAirdropPage');
+        const myAirdropsPage = document.getElementById('myAirdropsPage');
+        const scamsterPage = document.getElementById('scamsterPage');
+        const profileSettingsPage = document.getElementById('profileSettingsPage');
+        const airdropList = document.getElementById('airdropList');
+        const scamList = document.getElementById('scamList');
+        const profilePic = document.getElementById('profilePic');
+        const fileInput = document.getElementById('fileInput');
+        let airdrops = JSON.parse(localStorage.getItem('airdrops')) || [];
+        let scams = JSON.parse(localStorage.getItem('scams')) || [];
+
+        // Event listeners for menu buttons
+        newAirdropBtn.addEventListener('click', () => {
+            newAirdropPage.classList.add('active');
+        });
+
+        myAirdropsBtn.addEventListener('click', () => {
+            myAirdropsPage.classList.add('active');
+            displayAirdrops();
+        });
+
+        scamsterBtn.addEventListener('click', () => {
+            scamsterPage.classList.add('active');
+            displayScams();
+        });
+
+        profileSettingsBtn.addEventListener('click', () => {
+            profileSettingsPage.classList.add('active');
+        });
+
+        // Back button functionality
+        function goBack() {
+            newAirdropPage.classList.remove('active');
+            myAirdropsPage.classList.remove('active');
+            scamsterPage.classList.remove('active');
+            profileSettingsPage.classList.remove('active');
+        }
+
+        // Save airdrop
+        function saveAirdrop() {
+            const name = document.getElementById('airdropName').value;
+            const website = document.getElementById('websiteLink').value;
+            const checkIn = document.getElementById('checkInLink').value;
+            const transaction = document.getElementById('transactionLink').value;
+            const funding = document.getElementById('fundingAmount').value;
+            const expectedDate = document.getElementById('expectedDate').value;
+
+            if (name && website && funding && expectedDate) {
+                const newAirdrop = { name, website, checkIn, transaction, funding, expectedDate };
+                airdrops.push(newAirdrop);
+                localStorage.setItem('airdrops', JSON.stringify(airdrops));
+                document.getElementById('airdropName').value = '';
+                document.getElementById('websiteLink').value = '';
+                document.getElementById('checkInLink').value = '';
+                document.getElementById('transactionLink').value = '';
+                document.getElementById('fundingAmount').value = '';
+                document.getElementById('expectedDate').value = '';
+                displayAirdrops();
+            }
+        }
+
+        // Display airdrops
+        function displayAirdrops() {
+            airdropList.innerHTML = '';
+            airdrops.forEach((airdrop, index) => {
+                const listItem = document.createElement('li');
+                listItem.innerHTML = `
+                    <strong>${airdrop.name}</strong><br>
+                    <a href="${airdrop.website}" target="_blank">Website</a><br>
+                    <a href="${airdrop.checkIn}" target="_blank">Daily Check-in</a><br>
+                    <a href="${airdrop.transaction}" target="_blank">Daily Transaction</a><br>
+                    Funding: ${airdrop.funding}<br>
+                    Expected Date: ${airdrop.expectedDate}<br>
+                    <button class="remove-button" onclick="removeAirdrop(${index})">Remove</button>
+                `;
+                airdropList.appendChild(listItem);
+            });
+        }
+
+        // Remove airdrop
+        function removeAirdrop(index) {
+            airdrops.splice(index, 1);
+            localStorage.setItem('airdrops', JSON.stringify(airdrops));
+            displayAirdrops();
+        }
+
+        // Display scams
+        function displayScams() {
+            scamList.innerHTML = '';
+            scams.forEach((scam, index) => {
+                const listItem = document.createElement('li');
+                listItem.classList.add('scam-item');
+                listItem.innerHTML = `
+                    <strong>Fukster</strong>
+                    <button class="remove-button" onclick="removeScam(${index})">Remove</button>
+                `;
+                scamList.appendChild(listItem);
+            });
+        }
+
+        // Flag scam
+        function flagScam() {
+            const scamUrl = document.getElementById('scamUrl').value;
+            if (scamUrl) {
+                scams.push(scamUrl);
+                localStorage.setItem('scams', JSON.stringify(scams));
+                document.getElementById('scamUrl').value = '';
+                displayScams();
+            }
+        }
+
+        // Remove scam
+        function removeScam(index) {
+            scams.splice(index, 1);
+            localStorage.setItem('scams', JSON.stringify(scams));
+            displayScams();
+        }
+
+        // Profile picture upload
+        fileInput.addEventListener('change', function () {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                profilePic.src = e.target.result;
+                localStorage.setItem('profilePic', e.target.result);
+            };
+            reader.readAsDataURL(fileInput.files[0]);
+        });
+
+        // Load saved profile pic
+        const savedProfilePic = localStorage.getItem('profilePic');
+        if (savedProfilePic) {
+            profilePic.src = savedProfilePic;
+        }
+
+        // Initial load
+        displayAirdrops();
+        displayScams();
+    </script>
+</body>
+</html>
