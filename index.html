@@ -36,9 +36,11 @@
 
         .menu {
             display: flex;
-            flex-direction: column;
+            flex-direction: column; /* Changed from grid to column layout */
+            gap: 20px; /* Adding space between menu items */
             align-items: center;
-            gap: 15px;
+            justify-content: center;
+            margin-top: 20px;
         }
 
         .menu-item {
@@ -245,7 +247,6 @@
                 <div class="menu-item-icon">🔄</div>
                 <div class="menu-item-text">Exchange</div>
             </div>
-            <!-- New Button for Free Crypto -->
             <div class="menu-item" id="freeCryptoBtn">
                 <div class="menu-item-icon">🎁</div>
                 <div class="menu-item-text">Get Free Crypto</div>
@@ -253,7 +254,6 @@
         </div>
     </div>
 
-        <!-- Full Page for New Airdrop -->
     <div class="full-page" id="newAirdropPage">
         <button class="back-button" onclick="goBack()">Back</button>
         <div class="full-page-header">Add New Airdrop</div>
@@ -268,7 +268,6 @@
         </div>
     </div>
 
-    <!-- Full Page for My Airdrops -->
     <div class="full-page" id="myAirdropsPage">
         <button class="back-button" onclick="goBack()">Back</button>
         <div class="full-page-header">My Airdrops</div>
@@ -279,7 +278,6 @@
         </div>
     </div>
 
-    <!-- Full Page for Your Reward -->
     <div class="full-page" id="yourRewardPage">
         <button class="back-button" onclick="goBack()">Back</button>
         <div class="full-page-header">Your Reward</div>
@@ -304,7 +302,6 @@
         const airdropList = document.getElementById('airdropList');
         let airdrops = JSON.parse(localStorage.getItem('airdrops')) || [];
 
-        // Event listeners for menu buttons
         newAirdropBtn.addEventListener('click', () => {
             newAirdropPage.classList.add('active');
         });
@@ -326,14 +323,12 @@
             window.location.href = "https://wwp.aifolr.com/redirect-zone/d4e51a15";
         });
 
-        // Back button functionality
         function goBack() {
             newAirdropPage.classList.remove('active');
             myAirdropsPage.classList.remove('active');
             yourRewardPage.classList.remove('active');
         }
 
-        // Save airdrop
         function saveAirdrop() {
             const name = document.getElementById('airdropName').value;
             const website = document.getElementById('websiteLink').value;
@@ -356,7 +351,6 @@
             }
         }
 
-        // Display airdrops
         function displayAirdrops() {
             airdropList.innerHTML = '';
             airdrops.forEach((airdrop, index) => {
@@ -374,7 +368,6 @@
             });
         }
 
-        // Remove airdrop
         function removeAirdrop(index) {
             airdrops.splice(index, 1);
             localStorage.setItem('airdrops', JSON.stringify(airdrops));
