@@ -1,16 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta name="google-adsense-account" content="ca-pub-4606635702908979">
+    <script src='//niphaumeenses.net/vignette.min.js' data-zone='8654560' data-sdk='show_8654560'></script>
+    <meta name="monetag" content="cd25396b8bd821eebebde0fd9ff1a1b0">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#000000">
     <title>Crypto Airdrop Manager</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f9f9f9;
+            background-color: #121212;
+            color: #ffffff;
         }
 
         .container {
@@ -18,28 +21,16 @@
             padding: 20px;
         }
 
-        .profile-pic-container {
-            display: flex;
-            justify-content: center;
-            margin-top: 20px;
-        }
-
-        .profile-pic-container img {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            object-fit: cover;
-        }
-
         .app-title {
             font-size: 24px;
             font-weight: bold;
             margin-top: 20px;
+            color: #f5ba3a;
         }
 
         .app-subtitle {
             font-size: 16px;
-            color: gray;
+            color: #cccccc;
             margin-bottom: 20px;
         }
 
@@ -57,16 +48,16 @@
             width: 90%;
             max-width: 400px;
             padding: 15px;
-            background-color: #fff;
+            background-color: #1e1e1e;
             border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
             transition: transform 0.2s, box-shadow 0.2s;
             cursor: pointer;
         }
 
         .menu-item:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.6);
         }
 
         .menu-item-icon {
@@ -76,19 +67,19 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background-color: #f0f0f0;
+            background-color: #333333;
             border-radius: 50%;
         }
 
         .menu-item-text {
             font-size: 18px;
             font-weight: bold;
-            color: #333;
+            color: #f5f5f5;
         }
 
         .full-page {
             display: none;
-            background-color: #fff;
+            background-color: #1e1e1e;
             position: fixed;
             top: 0;
             left: 0;
@@ -109,6 +100,7 @@
             font-size: 20px;
             margin-bottom: 15px;
             font-weight: bold;
+            color: #f5ba3a;
         }
 
         .full-page-content {
@@ -117,17 +109,20 @@
 
         .input-field {
             width: 100%;
-            padding: 10px;
-            margin-bottom: 15px;
+            max-width: 300px;
+            padding: 8px;
+            margin-bottom: 10px;
             border-radius: 5px;
-            border: 1px solid #ccc;
-            font-size: 16px;
+            border: 1px solid #444444;
+            background-color: #333333;
+            color: #ffffff;
+            font-size: 14px;
         }
 
         .action-button {
             padding: 10px 20px;
-            background-color: #007bff;
-            color: white;
+            background-color: #f5ba3a;
+            color: #121212;
             border: none;
             border-radius: 5px;
             cursor: pointer;
@@ -139,8 +134,8 @@
 
         .back-button {
             padding: 10px 20px;
-            background-color: #ccc;
-            color: black;
+            background-color: #444444;
+            color: white;
             border: none;
             border-radius: 5px;
             cursor: pointer;
@@ -151,35 +146,50 @@
             opacity: 0.8;
         }
 
-        .profile-pic-upload {
-            margin-top: 10px;
-            padding: 8px 20px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        .profile-pic-upload:hover {
-            opacity: 0.8;
-        }
-
         .copyright {
             text-align: center;
             margin-top: 20px;
             font-size: 14px;
-            color: gray;
+            color: #666666;
+        }
+
+        /* Mobile Optimization */
+        @media (max-width: 600px) {
+            .app-title {
+                font-size: 20px;
+            }
+
+            .app-subtitle {
+                font-size: 14px;
+            }
+
+            .menu {
+                gap: 10px;
+            }
+
+            .menu-item {
+                width: 100%;
+                padding: 10px;
+            }
+
+            .menu-item-icon {
+                width: 30px;
+                height: 30px;
+                margin-right: 10px;
+            }
+
+            .menu-item-text {
+                font-size: 16px;
+            }
+
+            .full-page-header {
+                font-size: 18px;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- Profile Picture Section -->
-        <div class="profile-pic-container">
-            <img id="profilePic" src="https://via.placeholder.com/100" alt="Profile Picture">
-        </div>
-
         <div class="app-title">Crypto Airdrop Manager</div>
         <div class="app-subtitle">Managing airdrops efficiently</div>
 
@@ -192,22 +202,23 @@
                 <div class="menu-item-icon">📑</div>
                 <div class="menu-item-text">My Airdrops</div>
             </div>
-            <div class="menu-item" id="scamsterBtn">
-                <div class="menu-item-icon">🐹</div>
-                <div class="menu-item-text">Scamster</div>
+            <div class="menu-item" id="yourRewardBtn">
+                <div class="menu-item-icon">🏆</div>
+                <div class="menu-item-text">Your Reward</div>
             </div>
-            <div class="menu-item" id="profileSettingsBtn">
-                <div class="menu-item-icon">⚙️</div>
-                <div class="menu-item-text">Profile Settings</div>
+            <div class="menu-item" id="exchangeBtn">
+                <div class="menu-item-icon">🔄</div>
+                <div class="menu-item-text">Exchange</div>
             </div>
-            <div class="menu-item">
-                <div class="menu-item-icon">🔒</div>
-                <div class="menu-item-text">Security preferences</div>
+            <!-- New Button for Free Crypto -->
+            <div class="menu-item" id="freeCryptoBtn">
+                <div class="menu-item-icon">🎁</div>
+                <div class="menu-item-text">Get Free Crypto</div>
             </div>
         </div>
     </div>
 
-    <!-- Full Page for New Airdrop -->
+        <!-- Full Page for New Airdrop -->
     <div class="full-page" id="newAirdropPage">
         <button class="back-button" onclick="goBack()">Back</button>
         <div class="full-page-header">Add New Airdrop</div>
@@ -233,26 +244,12 @@
         </div>
     </div>
 
-    <!-- Full Page for Scamster -->
-    <div class="full-page" id="scamsterPage">
+    <!-- Full Page for Your Reward -->
+    <div class="full-page" id="yourRewardPage">
         <button class="back-button" onclick="goBack()">Back</button>
-        <div class="full-page-header">Scamster</div>
+        <div class="full-page-header">Your Reward</div>
         <div class="full-page-content">
-            <input class="input-field" type="url" id="scamUrl" placeholder="Enter URL to Flag" />
-            <button class="action-button" onclick="flagScam()">Flag Scam</button>
-            <ul class="scam-list" id="scamList">
-                <!-- Scam URLs will be displayed here dynamically -->
-            </ul>
-        </div>
-    </div>
-
-    <!-- Full Page for Profile Settings -->
-    <div class="full-page" id="profileSettingsPage">
-        <button class="back-button" onclick="goBack()">Back</button>
-        <div class="full-page-header">Profile Settings</div>
-        <div class="full-page-content">
-            <label for="profilePicUpload" class="profile-pic-upload">Choose Profile Picture</label>
-            <input type="file" id="fileInput" style="display: none;" accept="image/*">
+            <p>Sumit Yout Celo<a href="https://t.me/ArAirdropify_bot" target="_blank">@ArAirdropify_bot</a>once a week.</p>
         </div>
     </div>
 
@@ -263,18 +260,14 @@
     <script>
         const newAirdropBtn = document.getElementById('newAirdropBtn');
         const myAirdropsBtn = document.getElementById('myAirdropsBtn');
-        const scamsterBtn = document.getElementById('scamsterBtn');
-        const profileSettingsBtn = document.getElementById('profileSettingsBtn');
+        const yourRewardBtn = document.getElementById('yourRewardBtn');
+        const exchangeBtn = document.getElementById('exchangeBtn');
+        const freeCryptoBtn = document.getElementById('freeCryptoBtn');
         const newAirdropPage = document.getElementById('newAirdropPage');
         const myAirdropsPage = document.getElementById('myAirdropsPage');
-        const scamsterPage = document.getElementById('scamsterPage');
-        const profileSettingsPage = document.getElementById('profileSettingsPage');
+        const yourRewardPage = document.getElementById('yourRewardPage');
         const airdropList = document.getElementById('airdropList');
-        const scamList = document.getElementById('scamList');
-        const profilePic = document.getElementById('profilePic');
-        const fileInput = document.getElementById('fileInput');
         let airdrops = JSON.parse(localStorage.getItem('airdrops')) || [];
-        let scams = JSON.parse(localStorage.getItem('scams')) || [];
 
         // Event listeners for menu buttons
         newAirdropBtn.addEventListener('click', () => {
@@ -286,21 +279,23 @@
             displayAirdrops();
         });
 
-        scamsterBtn.addEventListener('click', () => {
-            scamsterPage.classList.add('active');
-            displayScams();
+        yourRewardBtn.addEventListener('click', () => {
+            alert('This feature is coming soon!');
         });
 
-        profileSettingsBtn.addEventListener('click', () => {
-            profileSettingsPage.classList.add('active');
+        exchangeBtn.addEventListener('click', () => {
+            alert('Feature coming soon');
+        });
+
+        freeCryptoBtn.addEventListener('click', () => {
+            window.location.href = "https://wwp.aifolr.com/redirect-zone/d4e51a15";
         });
 
         // Back button functionality
         function goBack() {
             newAirdropPage.classList.remove('active');
             myAirdropsPage.classList.remove('active');
-            scamsterPage.classList.remove('active');
-            profileSettingsPage.classList.remove('active');
+            yourRewardPage.classList.remove('active');
         }
 
         // Save airdrop
